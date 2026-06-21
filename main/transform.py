@@ -11,16 +11,16 @@ logger = get_logger("transform")
 def standardize_column_names(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("Standardizing column names...")
 
-    # Step A: strip spaces
+    # strip spaces
     df.columns = df.columns.str.strip()
 
-    # Step B: rename using our map
+    #  rename using our map
     df = df.rename(columns=COLUMN_RENAME_MAP, errors="ignore")
 
-    # Step C: auto clean remaining columns
+    #  auto clean remaining columns
     df.columns = [col.lower().replace(" ", "_") for col in df.columns]
 
-    # Step D: ← ADD THIS — remove duplicate columns, keep first occurrence
+    # remove duplicate columns, keep first occurrence
     df = df.loc[:, ~df.columns.duplicated()]
 
     logger.info(f"  → Final columns: {list(df.columns)}")
