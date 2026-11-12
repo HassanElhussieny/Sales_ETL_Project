@@ -7,33 +7,37 @@ A professional, production-ready ETL (Extract, Transform, Load) pipeline built w
 ## 📁 Project Structure
 
 ```
-Data_Analytics_project/
+Sales_ETL_Project/
 │
 ├── config/
+│   ├── __init__.py
 │   ├── settings.py       # All project settings in one place
-│   ├── .env              # Secret credentials (never committed to Git!)
-│   └── .gitignore        # Protects .env from being uploaded
+│   └── .env              # Your credentials — create locally, never committed (see step 5)
 │
 ├── data/
 │   ├── sales_2013.xlsx   # Raw sales data — drop any new year here!
 │   └── sales_2014.xlsx
 │
-├── logs/
-│   └── pipeline.log      # Auto-generated run history
+├── logs/                 # Created automatically on first run (git-ignored)
+│   └── pipeline.log      # Run history
 │
 ├── main/
-│   ├── logger.py         # Professional logging (terminal + file)
+│   ├── __init__.py
+│   ├── logger.py         # Logging to terminal + file
 │   ├── extract.py        # Auto-discovers and reads Excel files
 │   ├── transform.py      # Cleans, standardizes, and validates data
 │   ├── load.py           # Loads clean data into PostgreSQL
 │   └── notifier.py       # Sends Gmail alerts on success or failure
 │
 ├── scripts/
+│   ├── __init__.py
 │   └── pipeline.py       # Orchestrates the full ETL flow
 │
-├── run_pipeline.bat       # Windows batch file for Task Scheduler
-├── requirements.txt       # All Python dependencies
-└── README.md              # You are here!
+├── run_pipeline.bat      # Windows batch file for Task Scheduler (location-independent)
+├── requirements.txt      # Pinned Python dependencies
+├── .gitignore
+├── .gitattributes        # Line-ending rules
+└── README.md             # You are here!
 ```
 
 ---
@@ -60,8 +64,8 @@ PostgreSQL (sales_db → sales table)
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/sales-etl-pipeline.git
-cd sales-etl-pipeline
+git clone https://github.com/HassanElhussieny/Sales_ETL_Project.git
+cd Sales_ETL_Project
 ```
 
 ### 2. Create and activate virtual environment
@@ -118,6 +122,7 @@ python scripts\pipeline.py
 
 ## 📦 Requirements
 
+Main libraries (exact versions are pinned in `requirements.txt`):
 ```
 pandas
 openpyxl
@@ -153,11 +158,13 @@ pip install -r requirements.txt
 - Leading/trailing whitespace removal
 - Duplicate column detection and removal
 - Numeric type enforcement
-- Date parsing from Excel serial format
+- Date parsing to proper timestamps
 - Null filling for non-critical fields
 - Row dropping for missing required fields
 - Duplicate row removal
-- Audit column (`loaded_at`) added to every row
+- Audit columns added to every row: `source_file` (origin Excel file) and `loaded_at` (load timestamp)
+
+Rows are loaded in **append** mode (`LOAD_MODE` in `config/settings.py`), so running the pipeline again on the same files adds the rows again.
 
 ---
 
@@ -214,6 +221,8 @@ Use `run_pipeline.bat` with Windows Task Scheduler to run automatically:
 3. Action: Start `run_pipeline.bat`
 4. Done — pipeline runs automatically!
 
+`run_pipeline.bat` uses paths relative to its own folder, so it works wherever the project is cloned. It activates `venv\` if present, otherwise it uses the Python on your PATH.
+
 ---
 
 ## 🔗 Connect to Power BI
@@ -228,9 +237,9 @@ Use `run_pipeline.bat` with Windows Task Scheduler to run automatically:
 
 ## 👨‍💻 Author
 
-**Hassan El Hussieny**
-Data Analytics Engineer
-[LinkedIn](https://linkedin.com/in/yourprofile) | [GitHub](https://github.com/yourusername)
+**Hassan Elhussieny**
+Data Analyst
+[LinkedIn](https://www.linkedin.com/in/hassan-elhussieny-023291273/) | [GitHub](https://github.com/HassanElhussieny)
 
 ---
 
