@@ -10,7 +10,7 @@ import traceback
 import sys
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from config.settings import EMAIL_SENDER, EMAIL_PASSWORD, EMAIL_RECEIVER
+from config.settings import EMAIL_SENDER, EMAIL_PASSWORD, EMAIL_RECEIVER, LOG_FILE
 from main.logger import get_logger
 
 logger = get_logger("notifier")
@@ -86,7 +86,7 @@ Your ETL Sales Pipeline FAILED and needs attention!
 ──────────────────────────────
 
 Check the full logs at:
-Data_Analytics_project/logs/pipeline.log
+{LOG_FILE}
 
 This is an automated message from your ETL pipeline.
     """.strip()
