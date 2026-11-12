@@ -90,4 +90,6 @@ Check the full logs at:
 
 This is an automated message from your ETL pipeline.
     """.strip()
-    
+
+    logger.info("Sending failure notification email...")
+    _send_email(subject, body)
