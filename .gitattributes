@@ -1,2 +1,18 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Windows batch files must keep CRLF line endings to run reliably in cmd.exe
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Source and docs: always LF in the repository
+*.py   text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+
+# Binary files: never touch line endings or diff as text
+*.xlsx binary
+*.xls  binary
+*.pbix binary
+*.png  binary
+*.jpg  binary
