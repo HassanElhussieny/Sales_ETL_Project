@@ -79,5 +79,17 @@ def run_pipeline():
         return False
 
 
+def main() -> int:
+    """Run the pipeline and return a process exit code.
+
+    0 = success, 1 = the pipeline failed (the error is already logged and
+    the failure email sent by run_pipeline). Exceptions raised outside
+    run_pipeline's handler are not caught here, so Python exits non-zero
+    with the traceback. Windows Task Scheduler reads this as the task's
+    "Last Run Result".
+    """
+    return 0 if run_pipeline() else 1
+
+
 if __name__ == "__main__":
-    run_pipeline()
+    sys.exit(main())
