@@ -1,19 +1,32 @@
-# Virtual Environment
+# Virtual environments
 venv/
+.venv/
+env/
 
-# Python cache
+# Python cache / build artifacts
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
 
-# Environment variables
+# Environment variables / secrets (keep an example file if you add one)
 .env
+.env.*
+!.env.example
 
 # Logs
 logs/
+*.log
 
-# VS Code
+# Editors / IDEs
 .vscode/
+.idea/
+
+# Office temporary lock files (e.g. while an .xlsx is open in Excel)
+~$*
 
 # OS files
 .DS_Store
 Thumbs.db
+desktop.ini
