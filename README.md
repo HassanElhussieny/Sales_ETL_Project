@@ -118,6 +118,15 @@ data/
 python scripts\pipeline.py
 ```
 
+The script exits with code `0` on success and `1` on failure, so Windows Task Scheduler's "Last Run Result" shows failed runs correctly.
+
+### 8. Run the tests (optional)
+```bash
+pip install pytest
+python -m pytest tests
+```
+The tests run fully offline: the database, email and data steps are replaced with fakes.
+
 ---
 
 ## 📦 Requirements
